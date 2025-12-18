@@ -1,41 +1,28 @@
-dez. 18, 2025 11:10:12 AM liquibase.database
+dez. 18, 2025 2:12:39 PM liquibase.database
 INFO: Set default schema name to public
-dez. 18, 2025 11:10:13 AM liquibase.changelog
+dez. 18, 2025 2:12:39 PM liquibase.changelog
 INFO: Reading resource: db/changelog/migrations/001-create-boards.sql
-dez. 18, 2025 11:10:13 AM liquibase.changelog
+dez. 18, 2025 2:12:39 PM liquibase.changelog
 INFO: Reading resource: db/changelog/migrations/002-create-columns-table.sql
-dez. 18, 2025 11:10:13 AM liquibase.changelog
+dez. 18, 2025 2:12:39 PM liquibase.changelog
 INFO: Reading resource: db/changelog/migrations/003-create-cards-table.sql
-dez. 18, 2025 11:10:13 AM liquibase.changelog
+dez. 18, 2025 2:12:40 PM liquibase.changelog
 INFO: Reading resource: db/changelog/migrations/004-create-blocks-tables.sql
-dez. 18, 2025 11:10:14 AM liquibase.changelog
+dez. 18, 2025 2:12:40 PM liquibase.changelog
 INFO: Reading resource: db/changelog/migrations/005-create-set-unblock.sql
-dez. 18, 2025 11:10:14 AM liquibase.changelog
+dez. 18, 2025 2:12:40 PM liquibase.changelog
 INFO: Reading from public.databasechangelog
-dez. 18, 2025 11:10:14 AM liquibase.lockservice
+dez. 18, 2025 2:12:40 PM liquibase.lockservice
 INFO: Successfully acquired change log lock
-dez. 18, 2025 11:10:14 AM liquibase.command
-INFO: Using deploymentId: 6067014263
-dez. 18, 2025 11:10:14 AM liquibase.changelog
+dez. 18, 2025 2:12:40 PM liquibase.command
+INFO: Using deploymentId: 6077960265
+dez. 18, 2025 2:12:40 PM liquibase.changelog
 INFO: Reading from public.databasechangelog
-Running Changeset: db/changelog/migrations/002-create-columns-table.sql::002::luis
-dez. 18, 2025 11:10:14 AM liquibase.changelog
-SEVERE: ChangeSet db/changelog/migrations/002-create-columns-table.sql::002::luis encountered an exception.
-liquibase.exception.DatabaseException: ERROR: relation "boards_columns" already exists [Failed SQL: (0) CREATE TABLE BOARDS_COLUMNS (
-    id BIGSERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    "order" INT NOT NULL,
-    kind CHAR(7) NOT NULL,
-    board_id BIGINT NOT NULL,
-
-    CONSTRAINT boards_columns_board_fk
-        FOREIGN KEY (board_id)
-        REFERENCES BOARDS(id)
-        ON DELETE CASCADE,
-
-    CONSTRAINT boards_columns_board_order_uk
-        UNIQUE (board_id, "order")
-)]
+Running Changeset: db/changelog/migrations/005-create-set-unblock.sql::202408191938::junior
+dez. 18, 2025 2:12:40 PM liquibase.changelog
+SEVERE: ChangeSet db/changelog/migrations/005-create-set-unblock.sql::202408191938::junior encountered an exception.
+liquibase.exception.DatabaseException: ERROR: syntax error at or near "MODIFY"
+  Posição: 20 [Failed SQL: (0) ALTER TABLE BLOCKS MODIFY COLUMN unblock_reason VARCHAR(255) NULL]
 	at liquibase.core@4.29.1/liquibase.executor.jvm.JdbcExecutor$ExecuteStatementCallback.doInStatement(JdbcExecutor.java:476)
 	at liquibase.core@4.29.1/liquibase.executor.jvm.JdbcExecutor.execute(JdbcExecutor.java:83)
 	at liquibase.core@4.29.1/liquibase.executor.jvm.JdbcExecutor.execute(JdbcExecutor.java:185)
@@ -77,7 +64,8 @@ liquibase.exception.DatabaseException: ERROR: relation "boards_columns" already 
 	at liquibase.core@4.29.1/liquibase.Liquibase.update(Liquibase.java:155)
 	at org.luis.board@1.0-SNAPSHOT/org.luis.board.persistence.migrations.MigrationStrategy.executeMigration(MigrationStrategy.java:36)
 	at org.luis.board@1.0-SNAPSHOT/org.luis.board.Main.main(Main.java:13)
-Caused by: org.postgresql.util.PSQLException: ERROR: relation "boards_columns" already exists
+Caused by: org.postgresql.util.PSQLException: ERROR: syntax error at or near "MODIFY"
+  Posição: 20
 	at org.postgresql.jdbc@42.7.3/org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2725)
 	at org.postgresql.jdbc@42.7.3/org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2412)
 	at org.postgresql.jdbc@42.7.3/org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:371)
@@ -93,53 +81,41 @@ Caused by: org.postgresql.util.PSQLException: ERROR: relation "boards_columns" a
 
 UPDATE SUMMARY
 Run:                          0
-Previously run:               1
+Previously run:               4
 Filtered out:                 0
 -------------------------------
 Total change sets:            5
 
-dez. 18, 2025 11:10:14 AM liquibase.util
+dez. 18, 2025 2:12:40 PM liquibase.util
 INFO: UPDATE SUMMARY
-dez. 18, 2025 11:10:14 AM liquibase.util
+dez. 18, 2025 2:12:40 PM liquibase.util
 INFO: Run:                          0
-dez. 18, 2025 11:10:14 AM liquibase.util
-INFO: Previously run:               1
-dez. 18, 2025 11:10:14 AM liquibase.util
+dez. 18, 2025 2:12:40 PM liquibase.util
+INFO: Previously run:               4
+dez. 18, 2025 2:12:40 PM liquibase.util
 INFO: Filtered out:                 0
-dez. 18, 2025 11:10:14 AM liquibase.util
+dez. 18, 2025 2:12:40 PM liquibase.util
 INFO: -------------------------------
-dez. 18, 2025 11:10:14 AM liquibase.util
+dez. 18, 2025 2:12:40 PM liquibase.util
 INFO: Total change sets:            5
-dez. 18, 2025 11:10:14 AM liquibase.util
+dez. 18, 2025 2:12:40 PM liquibase.util
 INFO: Update summary generated
-dez. 18, 2025 11:10:14 AM liquibase.command
+dez. 18, 2025 2:12:40 PM liquibase.command
 INFO: Update command encountered an exception.
-dez. 18, 2025 11:10:14 AM liquibase.lockservice
+dez. 18, 2025 2:12:40 PM liquibase.lockservice
 INFO: Successfully released change log lock
-dez. 18, 2025 11:10:14 AM liquibase.command
+dez. 18, 2025 2:12:40 PM liquibase.command
 INFO: Logging exception.
 ERROR: Exception Details
 ERROR: Exception Primary Class:  PSQLException
-ERROR: Exception Primary Reason:  ERROR: relation "boards_columns" already exists
+ERROR: Exception Primary Reason:  ERROR: syntax error at or near "MODIFY"
+  Posição: 20
 ERROR: Exception Primary Source:  PostgreSQL 13.13
-dez. 18, 2025 11:10:14 AM liquibase.command
+dez. 18, 2025 2:12:40 PM liquibase.command
 INFO: Command execution complete
-liquibase.exception.CommandExecutionException: liquibase.exception.LiquibaseException: liquibase.exception.MigrationFailedException: Migration failed for changeset db/changelog/migrations/002-create-columns-table.sql::002::luis:
-     Reason: liquibase.exception.DatabaseException: ERROR: relation "boards_columns" already exists [Failed SQL: (0) CREATE TABLE BOARDS_COLUMNS (
-    id BIGSERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    "order" INT NOT NULL,
-    kind CHAR(7) NOT NULL,
-    board_id BIGINT NOT NULL,
-
-    CONSTRAINT boards_columns_board_fk
-        FOREIGN KEY (board_id)
-        REFERENCES BOARDS(id)
-        ON DELETE CASCADE,
-
-    CONSTRAINT boards_columns_board_order_uk
-        UNIQUE (board_id, "order")
-)]
+liquibase.exception.CommandExecutionException: liquibase.exception.LiquibaseException: liquibase.exception.MigrationFailedException: Migration failed for changeset db/changelog/migrations/005-create-set-unblock.sql::202408191938::junior:
+     Reason: liquibase.exception.DatabaseException: ERROR: syntax error at or near "MODIFY"
+  Posição: 20 [Failed SQL: (0) ALTER TABLE BLOCKS MODIFY COLUMN unblock_reason VARCHAR(255) NULL]
 	at liquibase.core@4.29.1/liquibase.command.CommandScope.execute(CommandScope.java:258)
 	at liquibase.core@4.29.1/liquibase.Liquibase.lambda$update$0(Liquibase.java:216)
 	at liquibase.core@4.29.1/liquibase.Scope.lambda$child$0(Scope.java:191)
@@ -153,22 +129,9 @@ liquibase.exception.CommandExecutionException: liquibase.exception.LiquibaseExce
 	at liquibase.core@4.29.1/liquibase.Liquibase.update(Liquibase.java:155)
 	at org.luis.board@1.0-SNAPSHOT/org.luis.board.persistence.migrations.MigrationStrategy.executeMigration(MigrationStrategy.java:36)
 	at org.luis.board@1.0-SNAPSHOT/org.luis.board.Main.main(Main.java:13)
-Caused by: liquibase.exception.LiquibaseException: liquibase.exception.MigrationFailedException: Migration failed for changeset db/changelog/migrations/002-create-columns-table.sql::002::luis:
-     Reason: liquibase.exception.DatabaseException: ERROR: relation "boards_columns" already exists [Failed SQL: (0) CREATE TABLE BOARDS_COLUMNS (
-    id BIGSERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    "order" INT NOT NULL,
-    kind CHAR(7) NOT NULL,
-    board_id BIGINT NOT NULL,
-
-    CONSTRAINT boards_columns_board_fk
-        FOREIGN KEY (board_id)
-        REFERENCES BOARDS(id)
-        ON DELETE CASCADE,
-
-    CONSTRAINT boards_columns_board_order_uk
-        UNIQUE (board_id, "order")
-)]
+Caused by: liquibase.exception.LiquibaseException: liquibase.exception.MigrationFailedException: Migration failed for changeset db/changelog/migrations/005-create-set-unblock.sql::202408191938::junior:
+     Reason: liquibase.exception.DatabaseException: ERROR: syntax error at or near "MODIFY"
+  Posição: 20 [Failed SQL: (0) ALTER TABLE BLOCKS MODIFY COLUMN unblock_reason VARCHAR(255) NULL]
 	at liquibase.core@4.29.1/liquibase.changelog.ChangeLogIterator.run(ChangeLogIterator.java:148)
 	at liquibase.core@4.29.1/liquibase.command.core.AbstractUpdateCommandStep.lambda$run$0(AbstractUpdateCommandStep.java:113)
 	at liquibase.core@4.29.1/liquibase.Scope.lambda$child$0(Scope.java:191)
@@ -179,22 +142,9 @@ Caused by: liquibase.exception.LiquibaseException: liquibase.exception.Migration
 	at liquibase.core@4.29.1/liquibase.command.core.UpdateCommandStep.run(UpdateCommandStep.java:105)
 	at liquibase.core@4.29.1/liquibase.command.CommandScope.execute(CommandScope.java:220)
 	... 12 more
-Caused by: liquibase.exception.MigrationFailedException: Migration failed for changeset db/changelog/migrations/002-create-columns-table.sql::002::luis:
-     Reason: liquibase.exception.DatabaseException: ERROR: relation "boards_columns" already exists [Failed SQL: (0) CREATE TABLE BOARDS_COLUMNS (
-    id BIGSERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    "order" INT NOT NULL,
-    kind CHAR(7) NOT NULL,
-    board_id BIGINT NOT NULL,
-
-    CONSTRAINT boards_columns_board_fk
-        FOREIGN KEY (board_id)
-        REFERENCES BOARDS(id)
-        ON DELETE CASCADE,
-
-    CONSTRAINT boards_columns_board_order_uk
-        UNIQUE (board_id, "order")
-)]
+Caused by: liquibase.exception.MigrationFailedException: Migration failed for changeset db/changelog/migrations/005-create-set-unblock.sql::202408191938::junior:
+     Reason: liquibase.exception.DatabaseException: ERROR: syntax error at or near "MODIFY"
+  Posição: 20 [Failed SQL: (0) ALTER TABLE BLOCKS MODIFY COLUMN unblock_reason VARCHAR(255) NULL]
 	at liquibase.core@4.29.1/liquibase.changelog.ChangeSet.execute(ChangeSet.java:819)
 	at liquibase.core@4.29.1/liquibase.changelog.visitor.UpdateVisitor.executeAcceptedChange(UpdateVisitor.java:119)
 	at liquibase.core@4.29.1/liquibase.changelog.visitor.UpdateVisitor.visit(UpdateVisitor.java:68)
@@ -212,21 +162,8 @@ Caused by: liquibase.exception.MigrationFailedException: Migration failed for ch
 	at liquibase.core@4.29.1/liquibase.Scope.child(Scope.java:261)
 	at liquibase.core@4.29.1/liquibase.changelog.ChangeLogIterator.run(ChangeLogIterator.java:89)
 	... 20 more
-Caused by: liquibase.exception.DatabaseException: ERROR: relation "boards_columns" already exists [Failed SQL: (0) CREATE TABLE BOARDS_COLUMNS (
-    id BIGSERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    "order" INT NOT NULL,
-    kind CHAR(7) NOT NULL,
-    board_id BIGINT NOT NULL,
-
-    CONSTRAINT boards_columns_board_fk
-        FOREIGN KEY (board_id)
-        REFERENCES BOARDS(id)
-        ON DELETE CASCADE,
-
-    CONSTRAINT boards_columns_board_order_uk
-        UNIQUE (board_id, "order")
-)]
+Caused by: liquibase.exception.DatabaseException: ERROR: syntax error at or near "MODIFY"
+  Posição: 20 [Failed SQL: (0) ALTER TABLE BLOCKS MODIFY COLUMN unblock_reason VARCHAR(255) NULL]
 	at liquibase.core@4.29.1/liquibase.executor.jvm.JdbcExecutor$ExecuteStatementCallback.doInStatement(JdbcExecutor.java:476)
 	at liquibase.core@4.29.1/liquibase.executor.jvm.JdbcExecutor.execute(JdbcExecutor.java:83)
 	at liquibase.core@4.29.1/liquibase.executor.jvm.JdbcExecutor.execute(JdbcExecutor.java:185)
@@ -234,7 +171,8 @@ Caused by: liquibase.exception.DatabaseException: ERROR: relation "boards_column
 	at liquibase.core@4.29.1/liquibase.database.AbstractJdbcDatabase.executeStatements(AbstractJdbcDatabase.java:1189)
 	at liquibase.core@4.29.1/liquibase.changelog.ChangeSet.execute(ChangeSet.java:775)
 	... 35 more
-Caused by: org.postgresql.util.PSQLException: ERROR: relation "boards_columns" already exists
+Caused by: org.postgresql.util.PSQLException: ERROR: syntax error at or near "MODIFY"
+  Posição: 20
 	at org.postgresql.jdbc@42.7.3/org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2725)
 	at org.postgresql.jdbc@42.7.3/org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2412)
 	at org.postgresql.jdbc@42.7.3/org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:371)

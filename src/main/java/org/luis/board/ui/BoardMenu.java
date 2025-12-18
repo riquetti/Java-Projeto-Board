@@ -14,6 +14,8 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import static org.luis.board.persistence.config.ConnectionConfig.getConnection;
+import org.luis.board.persistence.entity.CardStatus;
+
 
 @AllArgsConstructor
 public class BoardMenu {
@@ -21,6 +23,7 @@ public class BoardMenu {
     private final Scanner scanner = new Scanner(System.in).useDelimiter("\n");
 
     private final BoardEntity entity;
+
 
     public void execute() {
         try {
@@ -157,20 +160,39 @@ public class BoardMenu {
     private void showCard() throws SQLException {
         System.out.println("Informe o id do card que deseja visualizar");
         var selectedCardId = scanner.nextLong();
-        try(var connection  = getConnection()){
-            new CardQueryService(connection).findById(selectedCardId)
+
+        var boardColumnsInfo = entity.getBoardColumns().stream()
+                .map(bc -> new BoardColumnInfoDTO(bc.getId(), bc.getOrder(), bc.getKind()))
+                .toList();
+
+        try (var connection = getConnection()) {
+            var cardQueryService = new CardQueryService(connection);
+            var cardService = new CardService(connection);
+
+            cardQueryService.findById(selectedCardId)
                     .ifPresentOrElse(
                             c -> {
-                                System.out.printf("Card %s - %s.\n", c.id(), c.title());
+                                System.out.printf("Card %s - %s\n", c.id(), c.title());
                                 System.out.printf("Descrição: %s\n", c.description());
-                                System.out.println(c.blocked() ?
-                                        "Está bloqueado. Motivo: " + c.blockReason() :
-                                        "Não está bloqueado");
+
+                                System.out.println(c.blocked()
+                                        ? "Está bloqueado. Motivo: " + c.blockReason()
+                                        : "Não está bloqueado");
+
                                 System.out.printf("Já foi bloqueado %s vezes\n", c.blocksAmount());
-                                System.out.printf("Está no momento na coluna %s - %s\n", c.columnId(), c.columnName());
+                                System.out.printf("Está na coluna %s - %s\n",
+                                        c.columnId(), c.columnName());
+
+                                CardStatus status =
+                                        cardService.resolveStatus(c.columnId(), boardColumnsInfo);
+
+                                System.out.printf("Status do card: %s\n", status);
                             },
-                            () -> System.out.printf("Não existe um card com o id %s\n", selectedCardId));
+                            () -> System.out.printf(
+                                    "Não existe um card com o id %s\n", selectedCardId)
+                    );
         }
     }
+
 
 }

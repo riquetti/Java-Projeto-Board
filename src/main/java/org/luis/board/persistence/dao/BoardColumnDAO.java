@@ -84,7 +84,7 @@ public class BoardColumnDAO {
                (
                    SELECT COUNT(c.id)
                      FROM CARDS c
-                    WHERE c.board_column_id = bc.id
+                    WHERE c.board_columns_id = bc.id
                ) AS cards_amount
           FROM BOARDS_COLUMNS bc
          WHERE bc.board_id = ?
@@ -118,7 +118,7 @@ public class BoardColumnDAO {
                c.description AS card_description
           FROM BOARDS_COLUMNS bc
           LEFT JOIN CARDS c
-            ON c.board_column_id = bc.id
+            ON c.board_columns_id = bc.id
          WHERE bc.id = ?;
         """;
 

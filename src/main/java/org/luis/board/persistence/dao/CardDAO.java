@@ -19,7 +19,7 @@ public class CardDAO {
 
     public CardEntity insert(final CardEntity entity) throws SQLException {
         var sql = """
-            INSERT INTO CARDS (title, description, board_column_id)
+            INSERT INTO CARDS (title, description, board_columns_id)
             VALUES (?, ?, ?);
             """;
 
@@ -43,7 +43,7 @@ public class CardDAO {
     }
 
     public void moveToColumn(final Long columnId, final Long cardId) throws SQLException {
-        var sql = "UPDATE CARDS SET board_column_id = ? WHERE id = ?;";
+        var sql = "UPDATE CARDS SET board_columns_id = ? WHERE id = ?;";
         try (var statement = connection.prepareStatement(sql)) {
             var i = 1;
             statement.setLong(i++, columnId);
@@ -59,7 +59,7 @@ public class CardDAO {
                    c.description       AS card_description,
                    b.blocked_at         AS blocked_at,
                    b.block_reason       AS block_reason,
-                   c.board_column_id   AS column_id,
+                   c.board_columns_id   AS column_id,
                    bc.name              AS column_name,
                    (
                        SELECT COUNT(sub_b.id)
@@ -71,7 +71,7 @@ public class CardDAO {
                 ON c.id = b.card_id
                AND b.unblocked_at IS NULL
              INNER JOIN BOARDS_COLUMNS bc
-                ON bc.id = c.board_column_id
+                ON bc.id = c.board_columns_id
              WHERE c.id = ?;
             """;
 
